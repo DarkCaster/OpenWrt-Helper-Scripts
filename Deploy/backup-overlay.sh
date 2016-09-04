@@ -19,6 +19,9 @@ date=`date +%Y-%m-%d+%H-%M-%S`
 
 script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
-rsync -vcrlHpEDtW --numeric-ids --inplace root@$ipaddr:/overlay/upper/ "$script_dir/overlay-backup-$date"/
+test ! -d "$script_dir/overlay-backups" && mkdir "$script_dir/overlay-backups"
+check_error
+
+rsync -vcrlHpEDtW --numeric-ids --inplace root@$ipaddr:/overlay/upper/ "$script_dir/overlay-backups/backup-$date"/
 check_error
 

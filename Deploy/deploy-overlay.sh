@@ -20,7 +20,7 @@ test "z$cfgdir" = "z" && showusage && exit 2
 
 if [ ! -d "$cfgdir" ]; then
  script_dir="$( cd "$( dirname "$0" )" && pwd )"
- cfgdir="$script_dir/$cfgdir"
+ cfgdir="$script_dir/overlay-backups/$cfgdir"
 fi
 
 test ! -d "$cfgdir" && echo "$cfgdir directory is missing" && exit 1
