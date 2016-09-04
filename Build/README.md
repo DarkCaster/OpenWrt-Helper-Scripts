@@ -9,3 +9,6 @@ This script perform cleanup of env-variables before configure and build openwrt 
 For now it just remove all unnecessary variables from my particular env.
 TODO: smart remove variables based on blacklist (or whitelist).
 
+## pre-step-2-prepare-src.sh
+
+This script should be started from build directory. It performs OpenWrt source tree preparation, feeds update and external packages configuration.
