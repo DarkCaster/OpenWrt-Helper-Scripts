@@ -1,7 +1,7 @@
 #!/bin/bash
 
 showusage () {
- echo "Usage: deploy-config.sh <router ip> <config-dir> [target-dir-on-router]"
+ echo "Usage: deploy-config.sh <router ip> <overlay-backup-dir> [target-dir-on-router]"
 }
 
 check_error () {
