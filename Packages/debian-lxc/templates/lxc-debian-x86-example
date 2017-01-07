@@ -1,0 +1,228 @@
+#!/bin/bash
+
+#
+# lxc: linux Container library
+
+LXC_MAPPED_UID=
+LXC_MAPPED_GID=
+
+main_script_dir="$( cd "$( dirname "$0" )" && pwd )"
+
+# Make sure the usual locations are in PATH
+export PATH=$PATH:/usr/sbin:/usr/bin:/sbin:/bin
+
+am_in_userns() {
+    [ -e /proc/self/uid_map ] || { echo no; return; }
+    [ "$(wc -l /proc/self/uid_map | awk '{ print $1 }')" -eq 1 ] || { echo yes; return; }
+    line=$(awk '{ print $1 " " $2 " " $3 }' /proc/self/uid_map)
+    [ "$line" = "0 0 4294967295" ] && { echo no; return; }
+    echo yes
+}
+
+in_userns=0
+[ $(am_in_userns) = "yes" ] && in_userns=1
+if [ "z$in_userns" = "z1" ]; then
+	echo "this container template does not support userns"
+	exit 1
+fi
+
+install_debian()
+{
+    rootfs=$1
+    name=$2
+    debootstrap --arch=i386 jessie $rootfs http://ftp.de.debian.org/debian
+	if [ "z$?" != "z0" ]; then
+        echo "debootstrap failed. debootstrap.log contents:"
+		cat "$rootfs/debootstrap/debootstrap.log"
+		return 1
+	fi
+	echo "bootstrap phase complete"
+
+    rm -rf $rootfs/dev
+	mkdir -p $rootfs/dev
+	mknod -m 666  $rootfs/dev/null c 1 3
+	mknod -m 666  $rootfs/dev/zero c 1 5
+	mknod -m 666  $rootfs/dev/random c 1 8
+	mknod -m 666  $rootfs/dev/urandom c 1 9
+	mkdir -m 755  $rootfs/dev/pts
+	mkdir -m 1777 $rootfs/dev/shm
+	mknod -m 666  $rootfs/dev/tty c 5 0
+	mknod -m 600  $rootfs/dev/console c 5 1
+	mknod -m 666  $rootfs/dev/tty0 c 4 0
+	mknod -m 666  $rootfs/dev/full c 1 7
+	mknod -m 600  $rootfs/dev/initctl p
+	mknod -m 666  $rootfs/dev/ptmx c 5 2
+	#mknod -m 600 ram0 b 1 0
+	
+	echo "essential device nodes created"
+    return 0
+}
+
+copy_configuration()
+{
+    path=$1
+    rootfs=$2
+    name=$3
+
+#generate config file
+	grep -q "^lxc.rootfs" $path/config 2>/dev/null || echo "lxc.rootfs = $rootfs" >> $path/config
+	cat <<EOF >> $path/config
+lxc.utsname = $name
+lxc.stopsignal = SIGKILL
+lxc.haltsignal = SIGUSR1
+lxc.init_cmd = /sbin/lxc-init-daemon
+#lxc.network.type = none
+lxc.tty = 2
+lxc.pts = 1024
+# memory limits
+lxc.cgroup.memory.soft_limit_in_bytes = 30M
+lxc.cgroup.memory.limit_in_bytes = 32M
+lxc.cgroup.memory.memsw.limit_in_bytes = 40M
+# devices
+lxc.cgroup.devices.deny = a
+# /dev/null and zero
+lxc.cgroup.devices.allow = c 1:3 rwm # dev/null
+lxc.cgroup.devices.allow = c 1:5 rwm # dev/zero
+# consoles
+lxc.cgroup.devices.allow = c 5:1 rwm # dev/console
+lxc.cgroup.devices.allow = c 5:0 rwm # dev/tty
+lxc.cgroup.devices.allow = c 4:0 rwm # dev/tty0
+# /dev/{,u}random
+lxc.cgroup.devices.allow = c 1:9 rwm # dev/urandom
+lxc.cgroup.devices.allow = c 1:8 rwm # dev/random
+lxc.cgroup.devices.allow = c 136:* rwm # dev/pts/*
+lxc.cgroup.devices.allow = c 5:2 rwm # dev/pts/ptmx
+# rtc
+lxc.cgroup.devices.allow = c 254:0 rwm
+# mount points
+lxc.mount.auto = cgroup:mixed proc:mixed sys:mixed
+# caps
+lxc.cap.drop = net_admin net_bind_service sys_admin sys_boot sys_chroot sys_module sys_nice sys_time syslog mac_admin mac_override
+EOF
+
+#create lxc-init for use with lxc-execute
+	cat <<EOF > $rootfs/sbin/lxc-init
+#!/bin/sh
+shift 1
+payload="\$@"
+pid=2
+shutdown () {
+ trap TERM USR1
+ kill -s TERM \$pid
+ if [ "\$?" != "0" ]; then
+  echo "failed to send TERM signal to pid \$pid"
+  kill -s KILL \$pid
+  exit 1
+ fi
+ wait \${pid}
+}
+trap shutdown TERM USR1
+check_errors () {
+ if [ "\$?" != "0" ]; then
+  exit 1
+ fi
+}
+
+echo "executing payload \$payload"
+\$payload
+EOF
+	chmod 755 $rootfs/sbin/lxc-init
+
+#create example lxc-rc-startup
+cat <<EOF > $rootfs/sbin/lxc-rc-startup
+#!/bin/sh
+echo "lxc-rc-startup is starting"
+echo "NOTE: add custom init logic here"
+echo "NOTE: lxc-rc-startup script may also run in foreground"
+sleep 1
+echo "lxc-rc-startup script complete"
+EOF
+chmod 755 $rootfs/sbin/lxc-rc-startup
+
+#create example lxc-rc-reboot
+cat <<EOF > $rootfs/sbin/lxc-rc-reboot
+echo "lxc-rc-reboot currently is not supported"
+exit 1
+EOF
+chmod 755 $rootfs/sbin/lxc-rc-reboot
+
+#create example lxc-rc-shutdown
+cat <<EOF > $rootfs/sbin/lxc-rc-shutdown
+echo "lxc-rc-shutdown script is starting"
+echo "NOTE: add custom shotdown logic here"
+echo "NOTE: you should terminate all custom processes here exept lxc-init-daemon (pid1), and perform any other cleanup"
+sleep 1
+echo "sending clean shutdown signal to lxc-init-daemon"
+kill -USR2 1
+echo "lxc-rc-shutdown script complete"
+EOF
+chmod 755 $rootfs/sbin/lxc-rc-shutdown
+
+#copy sinit.x86 to /sbin/lxc-init-daemon
+cp "$main_script_dir/sinit.x86" $rootfs/sbin/lxc-init-daemon
+chown root:root $rootfs/sbin/lxc-init-daemon
+chmod 755 $rootfs/sbin/lxc-init-daemon
+
+}
+
+usage()
+{
+    cat <<EOF
+$1 -h|--help -p|--path=<path>
+EOF
+    return 0
+}
+
+options=$(getopt -o hp:n: -l help,rootfs:,path:,name:,mapped-uid:,mapped-gid: -- "$@")
+if [ $? -ne 0 ]; then
+    usage $(basename $0)
+    exit 1
+fi
+eval set -- "$options"
+
+while true
+do
+    case "$1" in
+        -h|--help)      usage $0 && exit 0;;
+        -p|--path)      path=$2; shift 2;;
+        --rootfs)       rootfs=$2; shift 2;;
+        -n|--name)      name=$2; shift 2;;
+        --mapped-uid)   LXC_MAPPED_UID=$2; shift 2;;
+        --mapped-gid)   LXC_MAPPED_GID=$2; shift 2;;
+        --)             shift 1; break ;;
+        *)              break ;;
+    esac
+done
+
+if [ "$(id -u)" != "0" ]; then
+    echo "This script should be run as 'root'"
+    exit 1
+fi
+
+if [ -z "$path" ]; then
+    echo "'path' parameter is required"
+    exit 1
+fi
+
+# detect rootfs
+config="$path/config"
+if [ -z "$rootfs" ]; then
+    if grep -q '^lxc.rootfs' $config 2>/dev/null ; then
+        rootfs=$(awk -F= '/^lxc.rootfs =/{ print $2 }' $config)
+    else
+        rootfs=$path/rootfs
+    fi
+fi
+
+install_debian $rootfs $name
+if [ $? -ne 0 ]; then
+    echo "failed to install debian's rootfs"
+    exit 1
+fi
+
+copy_configuration $path $rootfs $name
+if [ $? -ne 0 ]; then
+    echo "failed to write configuration file"
+    exit 1
+fi
+
