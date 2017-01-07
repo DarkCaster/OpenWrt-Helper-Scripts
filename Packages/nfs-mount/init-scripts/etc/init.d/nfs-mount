@@ -1,0 +1,42 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006-2011 OpenWrt.org
+
+START=97
+STOP=10
+
+log () {
+ local msg="$@"
+ logger -t nfs-mount "$msg"
+ true
+}
+
+start() {
+ cat "/etc/nfs-mounts.conf" | while read -r line || [[ -n "$line" ]]; do
+  check=`echo "$line" | grep -v "^#" | wc -l`
+  test "$check" != "1" && continue
+  src=`echo "$line" | awk '{print $1}'`
+  tgt=`echo "$line" | awk '{print $2}'`
+  opts=`echo "$line" | awk '{print $3}'`
+  test "z$src" = "z" && continue
+  test "z$tgt" = "z" && continue
+  test "z$opts" = "z" && continue
+  log "mounting $src to $tgt with options $opts"
+  mount -t nfs -o $opts "$src" "$tgt"
+ done
+}
+
+stop() {
+ cat "/etc/nfs-mounts.conf" | while read -r line || [[ -n "$line" ]]; do
+  check=`echo "$line" | grep -v "^#" | wc -l`
+  test "$check" != "1" && continue
+  src=`echo "$line" | awk '{print $1}'`
+  tgt=`echo "$line" | awk '{print $2}'`
+  opts=`echo "$line" | awk '{print $3}'`
+  test "z$src" = "z" && continue
+  test "z$tgt" = "z" && continue
+  test "z$opts" = "z" && continue
+  log "umounting $tgt"
+  umount "$tgt"
+ done
+}
+
