@@ -1,0 +1,17 @@
+diff -uprN ./OpenWrt-SDK-15.05.1.cc.kvm-x86-kvm_guest_gcc-4.8-linaro_glibc-2.21.Linux-x86_64.old/rules.mk ./OpenWrt-SDK-15.05.1.cc.kvm-x86-kvm_guest_gcc-4.8-linaro_glibc-2.21.Linux-x86_64/rules.mk
+--- ./OpenWrt-SDK-15.05.1.cc.kvm-x86-kvm_guest_gcc-4.8-linaro_glibc-2.21.Linux-x86_64.old/rules.mk	2016-04-07 03:19:13.747733159 +0300
++++ ./OpenWrt-SDK-15.05.1.cc.kvm-x86-kvm_guest_gcc-4.8-linaro_glibc-2.21.Linux-x86_64/rules.mk	2016-04-15 03:22:22.081451233 +0300
+@@ -236,12 +236,7 @@ export TARGET_CC_NOCACHE
+ export TARGET_CXX_NOCACHE
+ export HOSTCC_NOCACHE
+ 
+-ifneq ($(CONFIG_CCACHE),)
+-  TARGET_CC:= ccache_cc
+-  TARGET_CXX:= ccache_cxx
+-  HOSTCC:= ccache $(HOSTCC)
+-  HOSTCXX:= ccache $(HOSTCXX)
+-endif
++
+ 
+ TARGET_CONFIGURE_OPTS = \
+   AR="$(TARGET_AR)" \
