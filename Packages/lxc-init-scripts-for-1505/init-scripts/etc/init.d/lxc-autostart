@@ -1,0 +1,29 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006-2011 OpenWrt.org
+
+START=99
+STOP=05
+
+start() {
+ . /etc/lxc-autostart.conf
+ for cont in $containers; do
+  echo "starting lxc container with name $cont"
+  lxc-start -n "$cont"
+ done
+}
+
+stop() {
+ for cont in `lxc-ls --active`; do
+  echo "stopping lxc container with name $cont"
+  lxc-stop -n "$cont"
+ done
+ killall -TERM lxc-monitord
+ waitleft="5"
+ while [ "$waitleft" != "0" ]; do
+  lxc_check="`ps -w`"
+  test "`echo "$lxc_check" | grep "lxc-monitord" | wc -l`" = "0" && break
+  waitleft=`expr $waitleft - 1`
+  sleep 1
+ done
+}
+
