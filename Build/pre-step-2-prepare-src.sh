@@ -27,6 +27,9 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall oonf-dlep-radio
 ./scripts/feeds uninstall oonf-init-scripts
 
+#git repo is unavailable
+./scripts/feeds uninstall a51-flash
+
 ####################################################################################
 
 #bloat software, that also cause build failures with my specific configuration
@@ -114,7 +117,6 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall erlang
 ./scripts/feeds uninstall jamvm
 ./scripts/feeds uninstall ruby
-
 
 ###material theme
 #rsync -vrlHpEAXogDtSW --numeric-ids --delete-before ./../luci/themes/luci-theme-material ./feeds/luci/themes
