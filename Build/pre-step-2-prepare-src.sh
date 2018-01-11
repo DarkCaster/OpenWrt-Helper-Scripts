@@ -28,7 +28,7 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall oonf-init-scripts
 
 #git repo is unavailable
-./scripts/feeds uninstall a51-flash
+./scripts/feeds uninstall ap51-flash
 
 #build error
 ./scripts/feeds uninstall collectd
