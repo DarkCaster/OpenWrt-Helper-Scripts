@@ -32,6 +32,7 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
 #build error
 ./scripts/feeds uninstall collectd
+./scripts/feeds uninstall chardet
 
 ####################################################################################
 
