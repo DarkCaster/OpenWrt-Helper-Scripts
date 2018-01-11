@@ -30,6 +30,9 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 #git repo is unavailable
 ./scripts/feeds uninstall a51-flash
 
+#build error
+./scripts/feeds uninstall collectd
+
 ####################################################################################
 
 #bloat software, that also cause build failures with my specific configuration
