@@ -33,6 +33,16 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 #build error
 ./scripts/feeds uninstall collectd
 ./scripts/feeds uninstall chardet
+./scripts/feeds uninstall django
+./scripts/feeds uninstall django-appconf
+./scripts/feeds uninstall django-compressor
+./scripts/feeds uninstall django-constance
+./scripts/feeds uninstall django-jsonfield
+./scripts/feeds uninstall django-picklefield
+./scripts/feeds uninstall django-postoffice
+./scripts/feeds uninstall django-restframework
+./scripts/feeds uninstall django-statici18n
+./scripts/feeds uninstall openpyxl #depends on django
 
 ####################################################################################
 
