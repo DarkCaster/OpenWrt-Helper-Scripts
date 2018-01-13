@@ -50,6 +50,10 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall ndppd
 ./scripts/feeds uninstall sipp
 
+# pam headers missing ?
+./scripts/feeds uninstall openssh-client
+./scripts/feeds uninstall sshtunnel
+
 # disabled beacause of failing luasocket: https://github.com/openwrt/packages/issues/3590
 ./scripts/feeds uninstall luarocks
 ./scripts/feeds uninstall prosody
@@ -68,45 +72,43 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall vallumd
 ./scripts/feeds uninstall libwebsockets
 
+# recheck
+#./scripts/feeds uninstall sstp-client
+#./scripts/feeds uninstall tmux
+#./scripts/feeds uninstall mktorrent
+#./scripts/feeds uninstall mailman
+#./scripts/feeds uninstall linknx
+#./scripts/feeds uninstall seafile-ccnet
+#./scripts/feeds uninstall seafile-seahub
+#./scripts/feeds uninstall seafile-server
+#./scripts/feeds uninstall pthsem
+#./scripts/feeds uninstall libzdb
+#./scripts/feeds uninstall libsearpc
+
 #bloat software, that also cause build failures with my specific configuration
-./scripts/feeds uninstall zabbix-agent
 ./scripts/feeds uninstall luci-app-radicale
 ./scripts/feeds uninstall radicale-py2
 ./scripts/feeds uninstall freeswitch
-./scripts/feeds uninstall kamailio3
 ./scripts/feeds uninstall kamailio4
-./scripts/feeds uninstall libmicroxml
-./scripts/feeds uninstall linknx
 ./scripts/feeds uninstall yunbridge
 
 ./scripts/feeds uninstall alfred
-./scripts/feeds uninstall freecwmp
-./scripts/feeds uninstall libfreecwmp
-./scripts/feeds uninstall mailman
-./scripts/feeds uninstall mktorrent
-./scripts/feeds uninstall sstp-client
-./scripts/feeds uninstall sshtunnel
 ./scripts/feeds uninstall dansguardian
 ./scripts/feeds uninstall e2guardian
 ./scripts/feeds uninstall crtmpserver
 ./scripts/feeds uninstall alpine
 ./scripts/feeds uninstall apache
-./scripts/feeds uninstall tmux
 ./scripts/feeds uninstall kismet-server
 ./scripts/feeds uninstall batmand
 ./scripts/feeds uninstall batctl
 
-./scripts/feeds uninstall seafile-ccnet
-./scripts/feeds uninstall seafile-seahub
-./scripts/feeds uninstall seafile-server
-./scripts/feeds uninstall pthsem
 ./scripts/feeds uninstall redsocks
 ./scripts/feeds uninstall libupm
 ./scripts/feeds uninstall knxd
 ./scripts/feeds uninstall classpath
 ./scripts/feeds uninstall libmraa
 ./scripts/feeds uninstall libpam
-./scripts/feeds uninstall libzdb
+
 ./scripts/feeds uninstall libzmq-nc
 ./scripts/feeds uninstall lzmq
 ./scripts/feeds uninstall nut
@@ -114,14 +116,12 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall zile
 ./scripts/feeds uninstall restund
 ./scripts/feeds uninstall yate
-./scripts/feeds uninstall libsearpc
 
 ./scripts/feeds uninstall node-arduino-firmata
 ./scripts/feeds uninstall node-cylon
 ./scripts/feeds uninstall node-hid
 ./scripts/feeds uninstall node-serialport
 ./scripts/feeds uninstall node
-./scripts/feeds uninstall php5
 
 ./scripts/feeds uninstall erlang
 ./scripts/feeds uninstall jamvm
