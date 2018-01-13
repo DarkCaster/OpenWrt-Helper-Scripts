@@ -68,15 +68,6 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall vallumd
 ./scripts/feeds uninstall libwebsockets
 
-# recheck
-./scripts/feeds uninstall aria2
-./scripts/feeds uninstall btrfs-progs
-./scripts/feeds uninstall nmap
-./scripts/feeds uninstall openssh-client
-./scripts/feeds uninstall hfsfsck
-./scripts/feeds uninstall screen
-./scripts/feeds uninstall squid
-
 #bloat software, that also cause build failures with my specific configuration
 ./scripts/feeds uninstall zabbix-agent
 ./scripts/feeds uninstall luci-app-radicale
