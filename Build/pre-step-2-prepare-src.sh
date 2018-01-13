@@ -72,19 +72,6 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall vallumd
 ./scripts/feeds uninstall libwebsockets
 
-# recheck
-#./scripts/feeds uninstall sstp-client
-#./scripts/feeds uninstall tmux
-#./scripts/feeds uninstall mktorrent
-#./scripts/feeds uninstall mailman
-#./scripts/feeds uninstall linknx
-#./scripts/feeds uninstall seafile-ccnet
-#./scripts/feeds uninstall seafile-seahub
-#./scripts/feeds uninstall seafile-server
-#./scripts/feeds uninstall pthsem
-#./scripts/feeds uninstall libzdb
-#./scripts/feeds uninstall libsearpc
-
 #bloat software, that also cause build failures with my specific configuration
 ./scripts/feeds uninstall luci-app-radicale
 ./scripts/feeds uninstall radicale-py2
