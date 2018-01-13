@@ -8,9 +8,6 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
-#recheck theese, now temporary disabled because of build bugs with my configuration:
-####################################################################################
-
 #fail after this commit: https://github.com/openwrt/packages/commit/400d01d37f5243308a4692b8c2a8b42cb6df23a1
 ./scripts/feeds uninstall tor
 
@@ -30,27 +27,58 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 #git repo is unavailable
 ./scripts/feeds uninstall ap51-flash
 
+#requres libuClibc++
+./scripts/feeds uninstall smartmontools
+
 #build error
 ./scripts/feeds uninstall collectd
-./scripts/feeds uninstall chardet
-./scripts/feeds uninstall django
-./scripts/feeds uninstall django-appconf
-./scripts/feeds uninstall django-compressor
-./scripts/feeds uninstall django-constance
-./scripts/feeds uninstall django-jsonfield
-./scripts/feeds uninstall django-picklefield
-./scripts/feeds uninstall django-postoffice
-./scripts/feeds uninstall django-restframework
-./scripts/feeds uninstall django-statici18n
-./scripts/feeds uninstall openpyxl #depends on django
+./scripts/feeds uninstall elektra-kdb
+./scripts/feeds uninstall freeradius2
+./scripts/feeds uninstall gpsd
+./scripts/feeds uninstall grilo
+./scripts/feeds uninstall grilo-plugins
+./scripts/feeds uninstall lcdgrilo
+./scripts/feeds uninstall hamlib
+./scripts/feeds uninstall horst
+./scripts/feeds uninstall iotivity
+./scripts/feeds uninstall loudmouth
+./scripts/feeds uninstall rtl-ais
+./scripts/feeds uninstall softethervpn
+./scripts/feeds uninstall opencv
+./scripts/feeds uninstall znc
+./scripts/feeds uninstall mcproxy
+./scripts/feeds uninstall ndppd
+./scripts/feeds uninstall sipp
 
-####################################################################################
+# disabled beacause of failing luasocket: https://github.com/openwrt/packages/issues/3590
+./scripts/feeds uninstall luarocks
+./scripts/feeds uninstall prosody
+./scripts/feeds uninstall luasoap
+./scripts/feeds uninstall luasec
+./scripts/feeds uninstall uuid
+./scripts/feeds uninstall json4lua
+./scripts/feeds uninstall luci-app-cjdns
+./scripts/feeds uninstall cjdns
+./scripts/feeds uninstall luasocket
 
-#bloat software, that also cause build failures with my specific configuration
+# disabled because of failed libwebsockets
+./scripts/feeds uninstall ttyd
 ./scripts/feeds uninstall mosquitto
 ./scripts/feeds uninstall lua-mosquitto
-./scripts/feeds uninstall zabbix-agent
+./scripts/feeds uninstall vallumd
+./scripts/feeds uninstall libwebsockets
+
+# recheck
+./scripts/feeds uninstall aria2
+./scripts/feeds uninstall btrfs-progs
+./scripts/feeds uninstall nmap
 ./scripts/feeds uninstall openssh-client
+./scripts/feeds uninstall hfsfsck
+./scripts/feeds uninstall screen
+./scripts/feeds uninstall squid
+
+#bloat software, that also cause build failures with my specific configuration
+./scripts/feeds uninstall zabbix-agent
 ./scripts/feeds uninstall luci-app-radicale
 ./scripts/feeds uninstall radicale-py2
 ./scripts/feeds uninstall freeswitch
@@ -65,35 +93,26 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall libfreecwmp
 ./scripts/feeds uninstall mailman
 ./scripts/feeds uninstall mktorrent
-./scripts/feeds uninstall nmap
 ./scripts/feeds uninstall sstp-client
 ./scripts/feeds uninstall sshtunnel
 ./scripts/feeds uninstall dansguardian
 ./scripts/feeds uninstall e2guardian
 ./scripts/feeds uninstall crtmpserver
-./scripts/feeds uninstall btrfs-progs
 ./scripts/feeds uninstall alpine
 ./scripts/feeds uninstall apache
-./scripts/feeds uninstall aria2
 ./scripts/feeds uninstall tmux
 ./scripts/feeds uninstall kismet-server
-
 ./scripts/feeds uninstall batmand
 ./scripts/feeds uninstall batctl
-./scripts/feeds uninstall f2fs-tools
-./scripts/feeds uninstall hfsfsck
 
 ./scripts/feeds uninstall seafile-ccnet
 ./scripts/feeds uninstall seafile-seahub
 ./scripts/feeds uninstall seafile-server
-
-./scripts/feeds uninstall squid
 ./scripts/feeds uninstall pthsem
 ./scripts/feeds uninstall redsocks
 ./scripts/feeds uninstall libupm
 ./scripts/feeds uninstall knxd
 ./scripts/feeds uninstall classpath
-./scripts/feeds uninstall boost
 ./scripts/feeds uninstall libmraa
 ./scripts/feeds uninstall libpam
 ./scripts/feeds uninstall libzdb
@@ -101,26 +120,24 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall lzmq
 ./scripts/feeds uninstall nut
 ./scripts/feeds uninstall pianod
-./scripts/feeds uninstall screen
-./scripts/feeds uninstall smartmontools
 ./scripts/feeds uninstall zile
 ./scripts/feeds uninstall restund
 ./scripts/feeds uninstall yate
 ./scripts/feeds uninstall libsearpc
 
-./scripts/feeds uninstall simplejson
-./scripts/feeds uninstall python3-bottle
-./scripts/feeds uninstall python3
-./scripts/feeds uninstall python-dns
-./scripts/feeds uninstall python-imglib
-./scripts/feeds uninstall python-mysql
-./scripts/feeds uninstall python-pip
-./scripts/feeds uninstall python-pyserial
-./scripts/feeds uninstall python-setuptools
-./scripts/feeds uninstall python-yaml
-./scripts/feeds uninstall python
-./scripts/feeds uninstall micropython-lib
-./scripts/feeds uninstall micropython
+#./scripts/feeds uninstall simplejson
+#./scripts/feeds uninstall python3-bottle
+#./scripts/feeds uninstall python3
+#./scripts/feeds uninstall python-dns
+#./scripts/feeds uninstall python-imglib
+#./scripts/feeds uninstall python-mysql
+#./scripts/feeds uninstall python-pip
+#./scripts/feeds uninstall python-pyserial
+#./scripts/feeds uninstall python-setuptools
+#./scripts/feeds uninstall python-yaml
+#./scripts/feeds uninstall python
+#./scripts/feeds uninstall micropython-lib
+#./scripts/feeds uninstall micropython
 ./scripts/feeds uninstall node-arduino-firmata
 ./scripts/feeds uninstall node-cylon
 ./scripts/feeds uninstall node-hid
