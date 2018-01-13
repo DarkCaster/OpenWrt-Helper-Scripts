@@ -116,19 +116,6 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall yate
 ./scripts/feeds uninstall libsearpc
 
-#./scripts/feeds uninstall simplejson
-#./scripts/feeds uninstall python3-bottle
-#./scripts/feeds uninstall python3
-#./scripts/feeds uninstall python-dns
-#./scripts/feeds uninstall python-imglib
-#./scripts/feeds uninstall python-mysql
-#./scripts/feeds uninstall python-pip
-#./scripts/feeds uninstall python-pyserial
-#./scripts/feeds uninstall python-setuptools
-#./scripts/feeds uninstall python-yaml
-#./scripts/feeds uninstall python
-#./scripts/feeds uninstall micropython-lib
-#./scripts/feeds uninstall micropython
 ./scripts/feeds uninstall node-arduino-firmata
 ./scripts/feeds uninstall node-cylon
 ./scripts/feeds uninstall node-hid
