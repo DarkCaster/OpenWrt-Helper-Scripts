@@ -122,4 +122,3 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 test -d "$script_dir/dl" && rsync -vrlHpEAXogDtSW --numeric-ids --delete-before "$script_dir/dl" .
 
 rm -v .config .config.old
-
