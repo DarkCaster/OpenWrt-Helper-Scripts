@@ -17,6 +17,18 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 #currently fails on x86
 ./scripts/feeds uninstall krb5-libs
 
+#fails on gcc 6.x
+./scripts/feeds uninstall bonniexx # some stdlib macros was updated and incompatible now
+./scripts/feeds uninstall cgi-io # warnings threated as errors, some warnings appear on GCC 6
+./scripts/feeds uninstall coova-chilli # error: this 'if' clause does not guard... [-Werror=misleading-indentation]
+./scripts/feeds uninstall espeak # error: narrowing conversion of '194' from 'int' to 'char' inside { } [-Wnarrowing]
+./scripts/feeds uninstall gcc #native toolchain for run on target platform, using gcc 5.4 - failing to build with gcc 6.x cross-toolchain
+./scripts/feeds uninstall haveged #Error: operand value out of range for instruction
+./scripts/feeds uninstall libaudiofile  #error: left operand of shift expression '(-1 << 31)' is negative [-fpermissive]
+./scripts/feeds uninstall linknx
+./scripts/feeds uninstall mpd # depend on libaudiofile
+./scripts/feeds uninstall tvheadend # error: this 'for' clause does not guard... [-Werror=misleading-indentation]
+
 #error accessing repo
 ./scripts/feeds uninstall olsrd
 ./scripts/feeds uninstall oonf-olsrd2
@@ -26,9 +38,6 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
 #git repo is unavailable
 ./scripts/feeds uninstall ap51-flash
-
-#requres libuClibc++
-./scripts/feeds uninstall smartmontools
 
 #build error
 ./scripts/feeds uninstall collectd

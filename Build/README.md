@@ -11,7 +11,11 @@ TODO: smart remove variables based on blacklist (or whitelist).
 
 ## pre-step-2-prepare-src.sh
 
-This script should be started from build directory. It performs OpenWrt source tree preparation, feeds update and external packages configuration.
+This script should be started from build directory.
+It performs OpenWrt source tree preparation, feeds update and external packages configuration.
+Packages configuration targets latest released OpenWrt distro (LEDE 17.01 now).
+It may be not sutable for your env or build config.
+TODO: move openwrt version-dependend packages configuration to separate scripts
 
 ## post-step-create-dl-backup.sh
 
@@ -19,4 +23,3 @@ This script should be started from build directory after build is complete.
 It will create (and update) backup of cache folder (./dl) that is populated with source-archives of packages downloaded during build.
 At the time of next build this cache will be restored by pre-step-2-prepare-src.sh script,
 and this will reduce build time and failure probability, especially if your internet connection is bad (as my english, haha).
-
