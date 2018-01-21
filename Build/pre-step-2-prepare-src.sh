@@ -17,17 +17,10 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 #currently fails on x86
 ./scripts/feeds uninstall krb5-libs
 
-#fails on gcc 6.x
+#fails on gcc 6.x, gcc 7.x
 ./scripts/feeds uninstall bonniexx # some stdlib macros was updated and incompatible now
-./scripts/feeds uninstall cgi-io # warnings threated as errors, some warnings appear on GCC 6
-./scripts/feeds uninstall coova-chilli # error: this 'if' clause does not guard... [-Werror=misleading-indentation]
-./scripts/feeds uninstall espeak # error: narrowing conversion of '194' from 'int' to 'char' inside { } [-Wnarrowing]
 ./scripts/feeds uninstall gcc #native toolchain for run on target platform, using gcc 5.4 - failing to build with gcc 6.x cross-toolchain
 ./scripts/feeds uninstall haveged #Error: operand value out of range for instruction
-./scripts/feeds uninstall libaudiofile  #error: left operand of shift expression '(-1 << 31)' is negative [-fpermissive]
-./scripts/feeds uninstall linknx
-./scripts/feeds uninstall mpd # depend on libaudiofile
-./scripts/feeds uninstall tvheadend # error: this 'for' clause does not guard... [-Werror=misleading-indentation]
 
 #error accessing repo
 ./scripts/feeds uninstall olsrd
@@ -52,16 +45,12 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall iotivity
 ./scripts/feeds uninstall loudmouth
 ./scripts/feeds uninstall rtl-ais
-./scripts/feeds uninstall softethervpn
 ./scripts/feeds uninstall opencv
 ./scripts/feeds uninstall znc
 ./scripts/feeds uninstall mcproxy
 ./scripts/feeds uninstall ndppd
 ./scripts/feeds uninstall sipp
-
-# pam headers missing ?
-./scripts/feeds uninstall openssh-client
-./scripts/feeds uninstall sshtunnel
+./scripts/feeds uninstall softethervpn
 
 # disabled beacause of failing luasocket: https://github.com/openwrt/packages/issues/3590
 ./scripts/feeds uninstall luarocks
@@ -103,7 +92,6 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall knxd
 ./scripts/feeds uninstall classpath
 ./scripts/feeds uninstall libmraa
-./scripts/feeds uninstall libpam
 
 ./scripts/feeds uninstall libzmq-nc
 ./scripts/feeds uninstall lzmq
