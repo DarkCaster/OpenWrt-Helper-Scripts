@@ -17,10 +17,30 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 #currently fails on x86
 ./scripts/feeds uninstall krb5-libs
 
-#fails on gcc 6.x, gcc 7.x
+#fails on gcc 6.x
 ./scripts/feeds uninstall bonniexx # some stdlib macros was updated and incompatible now
 ./scripts/feeds uninstall gcc #native toolchain for run on target platform, using gcc 5.4 - failing to build with gcc 6.x cross-toolchain
 ./scripts/feeds uninstall haveged #Error: operand value out of range for instruction
+#fails on gcc 7.x
+./scripts/feeds uninstall rtl-sdr #link error: rtl_power.c:(.text+0xc16): undefined reference to `FIX_MPY'
+./scripts/feeds uninstall luci-app-dump1090 # depends on rtl-sdr
+./scripts/feeds uninstall dump1090 # depends on rtl-sdr
+./scripts/feeds uninstall addrwatch #storage.c:(.text+0xdc): undefined reference to `pkt_hash'
+./scripts/feeds uninstall aircrack-ng #aircrack-ng.c:(.text+0x579e): undefined reference to `wpa_send_passphrase'
+./scripts/feeds uninstall bandwidthd # bandwidthd.c:(.text+0xd54): undefined reference to `FindIp'; bandwidthd.c:(.text+0xd60): undefined reference to `Credit'
+./scripts/feeds uninstall bwm-ng # process.c:(.text+0x488): undefined reference to `save_avg_values'
+./scripts/feeds uninstall cmdpad # parse.c:(.text+0x1c): undefined reference to `rtrim'
+./scripts/feeds uninstall lcd4linux # drv_G15.c:(.text+0x1c8): undefined reference to `drv_G15_evalScanCode'
+./scripts/feeds uninstall linknx  # error: 'suncalc::std::abs' has not been declared
+./scripts/feeds uninstall netdata #web_client.c:(.text+0x37ba): undefined reference to `web_client_crock_socket'
+./scripts/feeds uninstall oath-toolkit # intprops.h:234:34: error: expected ')' before '(' token
+# depends on libsrtp
+./scripts/feeds uninstall asterisk13
+./scripts/feeds uninstall asterisk11-chan-dongle
+./scripts/feeds uninstall asterisk11
+./scripts/feeds uninstall asterisk11-codec-g729
+./scripts/feeds uninstall libpjsua2
+./scripts/feeds uninstall libsrtp # datatypes.c:(.text+0x11e): undefined reference to `hex_char_to_nibble'
 
 #error accessing repo
 ./scripts/feeds uninstall olsrd
