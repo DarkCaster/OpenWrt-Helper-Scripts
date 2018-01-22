@@ -34,6 +34,8 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 ./scripts/feeds uninstall linknx  # error: 'suncalc::std::abs' has not been declared
 ./scripts/feeds uninstall netdata #web_client.c:(.text+0x37ba): undefined reference to `web_client_crock_socket'
 ./scripts/feeds uninstall oath-toolkit # intprops.h:234:34: error: expected ')' before '(' token
+./scripts/feeds uninstall usbip # kernel build flags, need to remove -werror and others
+
 # depends on libsrtp
 ./scripts/feeds uninstall asterisk13
 ./scripts/feeds uninstall asterisk11-chan-dongle
