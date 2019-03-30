@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-# additional packages to uninstall for openwrt 18.06
+# additional packages to uninstall for openwrt 18.06, using gcc6
 
 ./scripts/feeds uninstall domoticz
 ./scripts/feeds uninstall freeswitch-stable
@@ -22,3 +22,4 @@
 ./scripts/feeds uninstall prometheus-node-exporter-lua
 ./scripts/feeds uninstall addrwatch
 ./scripts/feeds uninstall autossh
+./scripts/feeds uninstall bonnie++
