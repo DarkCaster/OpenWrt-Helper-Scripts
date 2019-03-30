@@ -20,3 +20,5 @@
 ./scripts/feeds uninstall luci-mod-freifunk-community
 ./scripts/feeds uninstall node-mozilla-iot-gateway
 ./scripts/feeds uninstall prometheus-node-exporter-lua
+./scripts/feeds uninstall addrwatch
+./scripts/feeds uninstall autossh
