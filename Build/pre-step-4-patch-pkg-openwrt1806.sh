@@ -28,3 +28,9 @@ pushd "package/feeds/packages/automake"
 wget -O Makefile.new https://raw.githubusercontent.com/openwrt/packages/d7fefd2963d0ecf6c449e9fcfc72efb6b2786a65/devel/automake/Makefile
 mv Makefile.new Makefile
 popd
+
+# libiio depends on zlib that may be not built when using parallel build
+
+target_file="package/feeds/packages/libiio/Makefile"
+echo "patching $target_file"
+sed -i 's|DEPENDS:=\\|DEPENDS:= +zlib \\|g' $target_file
