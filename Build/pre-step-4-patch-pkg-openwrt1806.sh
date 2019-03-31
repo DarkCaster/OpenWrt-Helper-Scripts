@@ -34,3 +34,9 @@ popd
 target_file="package/feeds/packages/libiio/Makefile"
 echo "patching $target_file"
 sed -i 's|DEPENDS:=\\|DEPENDS:= +zlib \\|g' $target_file
+
+# darkstat depends on libbsd
+
+target_file="package/feeds/packages/darkstat/Makefile"
+echo "patching $target_file"
+sed -i 's|DEPENDS:=+libpcap +zlib +USE_GLIBC:libbsd|DEPENDS:=+libbsd +libpcap +zlib +USE_GLIBC:libbsd|g' $target_file
