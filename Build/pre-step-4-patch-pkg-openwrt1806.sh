@@ -14,6 +14,12 @@ if [[ -f $target_file && -z `grep "HOST_BUILD_DEPENDS:=protobuf/host" $target_fi
   sed -i '/PKG_BUILD_DEPENDS:=protobuf-c\/host/a HOST_BUILD_DEPENDS:=protobuf\/host' $target_file
 fi
 
+# patch gammu packages
+
+target_file="package/feeds/packages/gammu/Makefile"
+echo "patching $target_file"
+sed -i 's|/usr/lib$(LIB_SUFFIX)|/usr/lib|g' $target_file
+
 # use automake 1.15.1 from trunk to fix build on Ubuntu 18.04
 # see https://forum.openwrt.org/t/building-automake-in-current-master-fails-with-help2man-error/13405/4 for more info
 
