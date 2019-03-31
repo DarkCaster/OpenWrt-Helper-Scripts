@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-# additional packages to uninstall for openwrt 18.06, using gcc6
+# additional packages to uninstall for openwrt 18.06, using gcc7
 
 # this packages removed to fix broken dependencies
 ./scripts/feeds uninstall domoticz
