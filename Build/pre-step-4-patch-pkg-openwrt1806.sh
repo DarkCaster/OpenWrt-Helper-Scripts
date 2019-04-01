@@ -40,3 +40,9 @@ sed -i 's|DEPENDS:=\\|DEPENDS:= +zlib \\|g' $target_file
 target_file="package/feeds/packages/darkstat/Makefile"
 echo "patching $target_file"
 sed -i 's|DEPENDS:=+libpcap +zlib +USE_GLIBC:libbsd|DEPENDS:=+libbsd +libpcap +zlib +USE_GLIBC:libbsd|g' $target_file
+
+# nfs-utils depends on libbsd
+
+target_file="package/feeds/packages/nfs-kernel-server/Makefile"
+echo "patching $target_file"
+sed -i 's|DEPENDS:=+libwrap +libblkid +libuuid $(LIBRPC_DEPENDS)|DEPENDS:=+libbsd +libwrap +libblkid +libuuid $(LIBRPC_DEPENDS)|g' $target_file
