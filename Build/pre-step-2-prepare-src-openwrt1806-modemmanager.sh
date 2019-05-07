@@ -3,9 +3,10 @@
 
 set -e
 
-#add mobile_broadband feed
-echo "src-git mobile_broadband https://gitlab.freedesktop.org/mobile-broadband/mobile-broadband-openwrt.git" >> feeds.conf
+script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
+# prepare custom feeds
+echo "src-git mobile_broadband https://gitlab.freedesktop.org/mobile-broadband/mobile-broadband-openwrt.git" > feeds.conf
 cat feeds.conf.default >> feeds.conf
 sed -i "s|src-git luci https://git.openwrt.org/project/luci.git;openwrt-18.06|src-link luci /tmp/luci-openwrt1806|g" feeds.conf
 
@@ -17,6 +18,3 @@ mv /tmp/luci-proto-modemmanager/luci-proto-modemmanager /tmp/luci-openwrt1806/pr
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
-
-./scripts/feeds update mobile_broadband
-./scripts/feeds install -p mobile_broadband -a
