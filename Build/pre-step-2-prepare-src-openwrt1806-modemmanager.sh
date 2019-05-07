@@ -18,3 +18,7 @@ mv /tmp/luci-proto-modemmanager/luci-proto-modemmanager /tmp/luci-openwrt1806/pr
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+
+test -d "$script_dir/dl" && rsync -vrlHpEAXogDtSW --numeric-ids --delete-before "$script_dir/dl" .
+
+rm -v .config .config.old
