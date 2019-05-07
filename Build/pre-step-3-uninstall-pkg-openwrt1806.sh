@@ -57,3 +57,4 @@
 
 # other
 ./scripts/feeds uninstall autossh # ssh command not found ?
+./scripts/feeds uninstall luajit # fatal error: bits/libc-header-start.h: No such file or directory
