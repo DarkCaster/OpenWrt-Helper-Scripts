@@ -6,7 +6,7 @@ set -e
 script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
 # prepare custom feeds
-echo "src-git mobile_broadband https://gitlab.freedesktop.org/mobile-broadband/mobile-broadband-openwrt.git" > feeds.conf
+echo "src-git mobile_broadband https://github.com/DarkCaster/OpenWrt-Mobile-Broadband.git;custom" > feeds.conf
 echo "src-git custom https://github.com/DarkCaster/OpenWrt-Custom-Feed.git" >> feeds.conf
 cat feeds.conf.default >> feeds.conf
 sed -i "s|src-git luci https://git.openwrt.org/project/luci.git;openwrt-18.06|src-link luci $PWD/luci-openwrt1806|g" feeds.conf
