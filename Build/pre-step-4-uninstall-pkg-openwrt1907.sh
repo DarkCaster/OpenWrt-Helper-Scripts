@@ -19,6 +19,8 @@
 ./scripts/feeds uninstall luci-app-olsr-viz
 ./scripts/feeds uninstall luci-mod-freifunk-community
 ./scripts/feeds uninstall node-mozilla-iot-gateway
+./scripts/feeds uninstall node-homebridge
+./scripts/feeds uninstall node-serialport-bindings
 ./scripts/feeds uninstall prometheus-node-exporter-lua
 
 # seems incompatible with gcc 6
@@ -36,16 +38,20 @@
 ./scripts/feeds uninstall nail
 ./scripts/feeds uninstall oath-toolkit
 ./scripts/feeds uninstall psqlodbc
+./scripts/feeds uninstall asu
 ./scripts/feeds uninstall quassel-irssi #-Werror=implicit-fallthrough=
 ./scripts/feeds uninstall rxtx # needs java (javac) for build
 ./scripts/feeds uninstall v4l2rtspserver # needs libasound.so.2
 ./scripts/feeds uninstall zmq #fatal error: basic_definitions: No such file or directory
+./scripts/feeds uninstall czmq
+./scripts/feeds uninstall fbzmq
 ./scripts/feeds uninstall pimbd
 # ./scripts/feeds uninstall omcproxy # cannot be uninstalled ? disabled in config, instead
 
 # does not build because of broken gstreamer1
 ./scripts/feeds uninstall gstreamer1
 ./scripts/feeds uninstall gnunet
+./scripts/feeds uninstall gnunet-fuse
 ./scripts/feeds uninstall gst1-plugins-ugly
 ./scripts/feeds uninstall gst1-plugins-good
 ./scripts/feeds uninstall gst1-plugins-base
@@ -59,3 +65,4 @@
 # other
 ./scripts/feeds uninstall autossh # ssh command not found ?
 ./scripts/feeds uninstall luajit # fatal error: bits/libc-header-start.h: No such file or directory
+./scripts/feeds uninstall snort3

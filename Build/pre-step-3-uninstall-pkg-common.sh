@@ -3,6 +3,7 @@
 
 # fail after this commit: https://github.com/openwrt/packages/commit/400d01d37f5243308a4692b8c2a8b42cb6df23a1
 ./scripts/feeds uninstall tor
+./scripts/feeds uninstall torsocks
 
 #looks like, it fail after gnutls update to newer version, recheck
 ./scripts/feeds uninstall wifidog
@@ -68,6 +69,7 @@
 ./scripts/feeds uninstall apache
 ./scripts/feeds uninstall kismet-server
 ./scripts/feeds uninstall batmand
+./scripts/feeds uninstall batman-adv
 ./scripts/feeds uninstall batctl
 
 ./scripts/feeds uninstall redsocks
