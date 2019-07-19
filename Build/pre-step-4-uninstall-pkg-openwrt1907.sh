@@ -66,3 +66,7 @@
 ./scripts/feeds uninstall autossh # ssh command not found ?
 ./scripts/feeds uninstall luajit # fatal error: bits/libc-header-start.h: No such file or directory
 ./scripts/feeds uninstall snort3
+
+./scripts/feeds uninstall nfs-kernel-server # menuconfig tmp/.config-package.in:55375:error: recursive dependency detected!
+./scripts/feeds uninstall samba4 # depends on nfs-kernel-server
+./scripts/feeds uninstall luci-app-samba4 # depends on samba4
