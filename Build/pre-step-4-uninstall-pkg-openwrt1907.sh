@@ -2,7 +2,7 @@
 #
 
 # TODO
-# additional packages to uninstall for openwrt 19.07, using gcc7
+# additional packages to uninstall for openwrt 19.07, using gcc7/8
 
 # this packages removed to fix broken dependencies
 ./scripts/feeds uninstall domoticz
