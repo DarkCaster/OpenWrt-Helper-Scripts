@@ -97,6 +97,7 @@ unset PYTHON_CONFIGURE_OPTS
 unset MERB_ENV
 unset RACK_ENV
 unset RBENV_SHELL
+unset RAILS_ENV
 unset RUBY_VERSION
 unset rvm_bin_path
 unset rvm_path
