@@ -69,3 +69,36 @@ unset XMODIFIERS
 unset XNLSPATH
 unset XSESSION_IS_UP
 
+#travis-ce stuff
+
+unset CC
+unset CC_FOR_BUILD
+unset GEM_HOME
+unset GEM_PATH
+unset GOPATH
+unset GOROOT
+unset IRBRC
+unset JAVA_HOME
+unset JRUBY_OPTS
+unset LANGUAGE
+unset LC_CTYPE
+unset MYSQL_UNIX_PORT
+unset MY_RUBY_HOME
+unset NVM_BIN
+unset NVM_CD_FLAGS
+unset NVM_DIR
+unset PERLBREW_HOME
+unset PERLBREW_ROOT
+unset PERLBREW_SHELLRC_VERSION
+unset PYENV_ROOT
+unset PYENV_SHELL
+unset PYTHON_CFLAGS
+unset PYTHON_CONFIGURE_OPTS
+unset MERB_ENV
+unset RACK_ENV
+unset RBENV_SHELL
+unset RUBY_VERSION
+unset rvm_bin_path
+unset rvm_path
+unset rvm_prefix
+unset rvm_version
