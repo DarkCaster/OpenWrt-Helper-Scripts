@@ -103,3 +103,7 @@ unset rvm_bin_path
 unset rvm_path
 unset rvm_prefix
 unset rvm_version
+
+#TODO: path for different distros
+
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
