@@ -12,7 +12,7 @@ cat feeds.conf.default >> feeds.conf
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
-test -d "$script_dir/dl" && rsync -vrlHpEAXogDtSW --numeric-ids --delete-before "$script_dir/dl" .
+test -d "$script_dir/../dl" && rsync -vrlHpEAXogDtSW --numeric-ids --delete-before "$script_dir/../dl" .
 
 rm -fv .config
 rm -fv .config.old
