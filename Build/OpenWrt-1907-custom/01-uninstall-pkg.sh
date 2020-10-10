@@ -3,6 +3,10 @@
 
 # packages to uninstall for openwrt 19.07 in order to fix broken stuff
 
+exit 0
+
+# all stuff seems to be fixed now
+
 # usage: ./scripts/feeds uninstall <package name>
 
 ./scripts/feeds uninstall nfs-kernel-server # menuconfig tmp/.config-package.in:55375:error: recursive dependency detected!
