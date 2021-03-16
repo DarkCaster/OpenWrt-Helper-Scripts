@@ -1,6 +1,6 @@
-diff -uprN Packages-Master/libs/protobuf/Makefile Packages-Master.new/libs/protobuf/Makefile
+diff -uprN Packages-Master/libs/protobuf/Makefile x.new/libs/protobuf/Makefile
 --- old/feeds/packages/libs/protobuf/Makefile	2021-02-07 21:08:57.269981991 +0300
-+++ new/feeds/packages/libs/protobuf/Makefile	2021-03-17 00:48:11.921824358 +0300
++++ new/feeds/packages/libs/protobuf/Makefile	2021-03-17 02:46:43.525329058 +0300
 @@ -75,7 +75,7 @@ CMAKE_HOST_OPTIONS += \
  	-DCMAKE_INSTALL_RPATH="${STAGING_DIR_HOSTPKG}/lib"
  
@@ -10,3 +10,14 @@ diff -uprN Packages-Master/libs/protobuf/Makefile Packages-Master.new/libs/proto
  	-Dprotobuf_BUILD_TESTS=OFF \
  	-Dprotobuf_WITH_ZLIB=ON \
  	-DBUILD_SHARED_LIBS=ON
+@@ -104,10 +104,6 @@ define Package/protobuf/install
+ 		$(1)/usr/lib
+ 
+ 	$(CP) \
+-		$(PKG_INSTALL_DIR)/usr/lib/libprotoc.so*  \
+-		$(1)/usr/lib/
+-
+-	$(CP) \
+ 		$(PKG_INSTALL_DIR)/usr/lib/libprotobuf.so* \
+ 		$(1)/usr/lib/
+ endef
