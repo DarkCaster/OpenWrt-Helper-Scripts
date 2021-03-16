@@ -1,0 +1,12 @@
+diff -uprN Packages-Master/libs/protobuf/Makefile Packages-Master.new/libs/protobuf/Makefile
+--- old/feeds/packages/libs/protobuf/Makefile	2021-02-07 21:08:57.269981991 +0300
++++ new/feeds/packages/libs/protobuf/Makefile	2021-03-17 00:48:11.921824358 +0300
+@@ -75,7 +75,7 @@ CMAKE_HOST_OPTIONS += \
+ 	-DCMAKE_INSTALL_RPATH="${STAGING_DIR_HOSTPKG}/lib"
+ 
+ CMAKE_OPTIONS += \
+-	-Dprotobuf_BUILD_PROTOC_BINARIES=ON \
++	-Dprotobuf_BUILD_PROTOC_BINARIES=OFF \
+ 	-Dprotobuf_BUILD_TESTS=OFF \
+ 	-Dprotobuf_WITH_ZLIB=ON \
+ 	-DBUILD_SHARED_LIBS=ON

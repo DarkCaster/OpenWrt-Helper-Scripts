@@ -1,0 +1,11 @@
+diff -uprN Packages-Master/net/openvpn/files/openvpn.options Packages-Master.new/net/openvpn/files/openvpn.options
+--- old/feeds/packages/net/openvpn/files/openvpn.options	2021-02-07 21:08:57.281981997 +0300
++++ new/feeds/packages/net/openvpn/files/openvpn.options	2021-03-17 01:16:25.019357551 +0300
+@@ -177,6 +177,7 @@ persist_tun
+ ping_timer_rem
+ pull
+ push_reset
++push_peer_info
+ remote_random
+ rmtun
+ route_noexec
