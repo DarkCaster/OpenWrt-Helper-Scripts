@@ -12,7 +12,7 @@ echo "src-git custom https://github.com/DarkCaster/OpenWrt-Custom-Feed.git" >> f
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
-test -d "$script_dir/../dl" && rsync -vrlHpEAXogDtSW --numeric-ids --delete-before "$script_dir/../dl" .
+test -d "$script_dir/../dl" && rsync -qrlHpEAXogDtSW --numeric-ids --delete-before "$script_dir/../dl" .
 
 rm -fv .config
 rm -fv .config.old

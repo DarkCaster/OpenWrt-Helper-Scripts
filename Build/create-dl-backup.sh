@@ -11,5 +11,5 @@ echo "making backup of ./dl folder"
 
 test -d "$script_dir/dl" || mkdir -v "$script_dir/dl"
 
-rsync -vcrlHpEAXogDtSW --numeric-ids --delete-before ./dl/ "$script_dir/dl"
+rsync -qcrlHpEAXogDtSW --numeric-ids --delete-before ./dl/ "$script_dir/dl"
 
