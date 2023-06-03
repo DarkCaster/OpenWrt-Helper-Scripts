@@ -7,7 +7,7 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
 # prepare custom feeds
 cat feeds.conf.default > feeds.conf
-echo "src-git custom \"file://${script_dir}/../../Custom-Feed\"" >> feeds.conf
+echo "src-git custom file://${script_dir}/../../../Custom-Feed" >> feeds.conf
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
