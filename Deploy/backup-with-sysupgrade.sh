@@ -1,7 +1,7 @@
 #!/bin/bash
 
 showusage () {
- echo "Usage: backup-with-sysupgrade <router ip>"
+ echo "Usage: backup-with-sysupgrade <router ip> [port]"
 }
 
 check_error () {
@@ -14,6 +14,9 @@ fi
 
 ipaddr="$1"
 test "z$ipaddr" = "z" && showusage && exit 1
+
+port="$2"
+test "z$port" = "z" && port="22"
 
 date=`date +%Y-%m-%d+%H-%M-%S`
 
@@ -28,7 +31,7 @@ if [ ! -d "$dest" ]; then
  check_error
 fi
 
-rsync -W --rsync-path='rm -f /tmp/cfgbak && sysupgrade -b /tmp/cfgbak && rsync' root@$ipaddr:"/tmp/cfgbak" "/tmp/cfgbak-$date.tar.gz"
+rsync -e 'ssh -p '$port'' -W --rsync-path='rm -f /tmp/cfgbak && sysupgrade -b /tmp/cfgbak && rsync' root@$ipaddr:"/tmp/cfgbak" "/tmp/cfgbak-$date.tar.gz"
 check_error
 
 mkdir "$script_dir/overlay-backups/backup-$date"
