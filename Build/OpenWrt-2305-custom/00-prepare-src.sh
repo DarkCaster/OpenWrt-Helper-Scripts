@@ -3,16 +3,17 @@
 
 set -e
 
-script_dir="$( cd "$( dirname "$0" )" && pwd )"
+script_dir="$(cd "$(dirname "$0")" && pwd)"
 
 # prepare custom feeds
-cat feeds.conf.default > feeds.conf
+cat feeds.conf.default >feeds.conf
 
 while IFS= read -r line; do
   [[ -z $line ]] && continue
   echo "adding repo $line"
-  echo "src-cpy $line ${script_dir}/../../../Custom-Feed/$line" >> feeds.conf
-done < "${script_dir}/../../../Custom-Feed/enabled-repos-2305.txt"
+  path=$(realpath "${script_dir}/../../../Custom-Feed/$line")
+  echo "src-cpy $line $path" >>feeds.conf
+done <"${script_dir}/../../../Custom-Feed/enabled-repos-2305.txt"
 
 sed -i -e 's|git.openwrt.org/feed|github.com/openwrt|g' feeds.conf
 sed -i -e 's|git.openwrt.org/project/luci.git|github.com/openwrt/luci.git|g' feeds.conf
