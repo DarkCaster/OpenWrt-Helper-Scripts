@@ -7,7 +7,6 @@ script_dir="$( cd "$( dirname "$0" )" && pwd )"
 
 # prepare custom feeds
 cat feeds.conf.default > feeds.conf
-echo "src-cpy custom ${script_dir}/../../../Custom-Feed" >> feeds.conf
 
 while IFS= read -r line; do
   [[ -z $line ]] && continue
